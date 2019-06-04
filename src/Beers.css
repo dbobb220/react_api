@@ -1,0 +1,25 @@
+.beer img {
+    grid-area: beer;
+    height: 10em;
+ }
+ 
+.beer h2 {
+     grid-area: name;
+     margin: 0;
+     text-align: left;
+ }
+ 
+ .beer p {
+    grid-area: tag;
+    margin: 0;
+    text-align: left;
+}
+ 
+ .beer {
+    display:grid;
+    grid-template-columns: 10em 1fr;
+    grid-template-areas: 
+    "beer name" 
+    "beer tag";
+    margin: 2em;
+ }

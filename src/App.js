@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import Beers from './Beers'
 
 class App extends Component {
   constructor(props) {
@@ -33,7 +34,16 @@ class App extends Component {
   render () {
     return (
       <div className="App">
-        <App/>
+       {
+         this.state.beerList.map(beer => (
+           <Beers
+              name = {beer.name}
+              tagline = {beer.tagline}
+              image = {beer.image}
+              key = {beer.id}
+           />
+         ))
+       }
       </div>
     )
   }
