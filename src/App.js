@@ -7,7 +7,8 @@ class App extends Component {
     super(props)
     this.state = {
       isLoading: true,
-      beerList: []
+      beerList: [],
+      likedBeers: []
     }
   }
 
@@ -31,19 +32,54 @@ class App extends Component {
       .catch(err => console.log('There was an error', err))
   }
 
+  likeButton = (index)=>{
+    const likedBeer = this.state.beerList[index];
+    let currLikedBeers = this.state.likedBeers;
+    currLikedBeers = [...currLikedBeers, likedBeer];
+    this.setState({likedBeers: currLikedBeers});
+  } 
+
+  unlikeButton = (index) =>{
+    
+    let currLikedBeers = this.state.likedBeers;
+    currLikedBeers.splice(index, 1);
+    this.setState({likedBeers: currLikedBeers});
+  }
+
+
   render () {
     return (
       <div className="App">
+       <div>
        {
-         this.state.beerList.map(beer => (
+         this.state.beerList.map((beer, index) => (
            <Beers
               name = {beer.name}
               tagline = {beer.tagline}
               image = {beer.image}
-              key = {beer.id}
+              key = {index}
+              index = {index}
+              likeButton = {this.unlikeButton}
+              buttonText = "Like"
            />
          ))
        }
+       </div> 
+       <div>
+       {
+         this.state.likedBeers.map((beer, index) => (
+           <Beers
+              name = {beer.name}
+              tagline = {beer.tagline}
+              image = {beer.image}
+              key = {index}
+              index = {index}
+              likeButton = {this.likeButton}
+              buttonText = "Unlike"
+           />
+         ))
+       }
+       </div> 
       </div>
     )
   }
