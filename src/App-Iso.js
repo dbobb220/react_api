@@ -61,7 +61,7 @@ class App extends Component {
               image = {beer.image}
               key = {index}
               index = {index}
-              likeButton = {this.unlikeButton}
+              likeButton = {this.likeButton}
               buttonText = "Like"
            />
          ))
@@ -76,7 +76,7 @@ class App extends Component {
               image = {beer.image}
               key = {index}
               index = {index}
-              likeButton = {this.likeButton}
+              likeButton = {this.unlikeButton}
               buttonText = "Unlike"
            />
          ))
