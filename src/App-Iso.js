@@ -35,17 +35,27 @@ class App extends Component {
   }
 
   likeButton = (index)=>{
-    const likedBeer = this.state.beerList[index];
+    let likedBeer = this.state.beerList[index];
     let currLikedBeers = this.state.likedBeers;
+    let currBeers = this.state.beerList;
     currLikedBeers = [...currLikedBeers, likedBeer];
-    this.setState({likedBeers: currLikedBeers});
+    currBeers.splice(index, 1);
+    this.setState({
+      likedBeers: currLikedBeers,
+      beerList: currBeers
+    });
   } 
 
   unlikeButton = (index) =>{
     
     let currLikedBeers = this.state.likedBeers;
-    currLikedBeers.splice(index, 1);
-    this.setState({likedBeers: currLikedBeers});
+    let unlikedBeer = currLikedBeers.splice(index, 1);
+    let currBeer = this.state.beerList;
+    let newBeerList = currBeer.concat(unlikedBeer)
+    this.setState({
+      likedBeers: currLikedBeers,
+      beerList: newBeerList
+    });
   }
 
 
@@ -53,34 +63,36 @@ class App extends Component {
     return (
       <div className="App">
        <div>
-       {
-         this.state.beerList.map((beer, index) => (
-           <Beers
-              name = {beer.name}
-              tagline = {beer.tagline}
-              image = {beer.image}
-              key = {index}
-              index = {index}
-              likeButton = {this.likeButton}
-              buttonText = "Like"
-           />
-         ))
-       }
+         <h3>Beer List</h3>
+        {
+          this.state.beerList.map((beer, index) => (
+            <Beers
+                name = {beer.name}
+                tagline = {beer.tagline}
+                image = {beer.image}
+                key = {index}
+                index = {index}
+                likeButton = {this.likeButton}
+                buttonText = "Like"
+            />
+          ))
+        }
        </div> 
        <div>
-       {
-         this.state.likedBeers.map((beer, index) => (
-           <Beers
-              name = {beer.name}
-              tagline = {beer.tagline}
-              image = {beer.image}
-              key = {index}
-              index = {index}
-              likeButton = {this.unlikeButton}
-              buttonText = "Unlike"
-           />
-         ))
-       }
+         <h3>Liked Beers</h3>
+        {
+          this.state.likedBeers.map((beer, index) => (
+            <Beers
+                name = {beer.name}
+                tagline = {beer.tagline}
+                image = {beer.image}
+                key = {index}
+                index = {index}
+                likeButton = {this.unlikeButton}
+                buttonText = "Unlike"
+            />
+          ))
+        }
        </div> 
       </div>
     )

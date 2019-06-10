@@ -35,17 +35,25 @@ class App extends Component {
   likeButton = (index)=>{
     let likedBeer = this.state.beerList[index];
     let currLikedBeers = this.state.likedBeers;
+    let currBeers = this.state.beerList;
     currLikedBeers = [...currLikedBeers, likedBeer];
+    currBeers.splice(index, 1);
     this.setState({
-      likedBeers: currLikedBeers
+      likedBeers: currLikedBeers,
+      beerList: currBeers
     });
   } 
 
   unlikeButton = (index) =>{
     
     let currLikedBeers = this.state.likedBeers;
-    currLikedBeers.splice(index, 1);
-    this.setState({likedBeers: currLikedBeers});
+    let unlikedBeer = currLikedBeers.splice(index, 1);
+    let currBeer = this.state.beerList;
+    let newBeerList = currBeer.concat(unlikedBeer)
+    this.setState({
+      likedBeers: currLikedBeers,
+      beerList: newBeerList
+    });
   }
 
 
